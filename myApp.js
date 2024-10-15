@@ -19,10 +19,11 @@ app.use(helmet.noSniff());
 app.use(helmet.ieNoOpen());
 
 // Configuring helmet.hsts() to use HTTPS for the next 90 days.
-var ninetyDaysInSeconds = 90*24*60*60;
+const ninetyDaysInSeconds = 90*24*60*60;
 app.use(helmet.hsts({maxAge: ninetyDaysInSeconds, force: true}))
 
-
+// Disabling DNS prefetching, at the cost of a performance penalty.
+app.use(helmet.dnsPrefetchControl());
 
 
 
