@@ -10,10 +10,10 @@ app.use(helmet.hidePoweredBy());
 app.use(helmet.frameguard({action: 'deny'}));
 
 // Using helmet.xssFilter() to enable the X-XSS-Protection HTTP header.
-app.use(helmet.xssFilter())
+app.use(helmet.xssFilter());
 
-
-
+// Using helmet.noSniff() to set the X-Content-Type-Options header to nosniff
+app.use(helmet.noSniff());
 
 
 
