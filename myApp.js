@@ -4,39 +4,53 @@ const app = express();
 const helmet = require('helmet');
 
 // Using the helmet.hidePoweredBy() middleware to remove the X-Powered-By header.
-app.use(helmet.hidePoweredBy());
+// app.use(helmet.hidePoweredBy());
 
 // Using helmet.frameguard() to set the X-Frame-Options header as DENY.
-app.use(helmet.frameguard({action: 'deny'}));
+// app.use(helmet.frameguard({action: 'deny'}));
 
 // Using helmet.xssFilter() to enable the X-XSS-Protection HTTP header.
-app.use(helmet.xssFilter());
+// app.use(helmet.xssFilter());
 
 // Using helmet.noSniff() to set the X-Content-Type-Options header to nosniff.
-app.use(helmet.noSniff());
+// app.use(helmet.noSniff());
 
 // Using helmet.ieNoOpen() to set X-Download-Options header to noopen.
-app.use(helmet.ieNoOpen());
+// app.use(helmet.ieNoOpen());
 
 // Configuring helmet.hsts() to use HTTPS for the next 90 days.
-const ninetyDaysInSeconds = 90*24*60*60;
-app.use(helmet.hsts({maxAge: ninetyDaysInSeconds, force: true}))
+// const ninetyDaysInSeconds = 90*24*60*60;
+// app.use(helmet.hsts({maxAge: ninetyDaysInSeconds, force: true}))
 
 // Disabling DNS prefetching, at the cost of a performance penalty.
-app.use(helmet.dnsPrefetchControl());
+// app.use(helmet.dnsPrefetchControl());
 
 // Disabling Client-Side Caching
-app.use(helmet.noCache());
+// app.use(helmet.noCache());
 
 // Setting a Content Security Policy
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", 'trusted-cdn.com'],
-  }
-}));
+// app.use(helmet.contentSecurityPolicy({
+//   directives: {
+//     defaultSrc: ["'self'"],
+//     scriptSrc: ["'self'", 'trusted-cdn.com'],
+//   }
+// }));
 
-
+// "parent" method used in real life scenearios
+app.use(helmet({
+  frameguard: {         // configure
+    action: 'deny'
+  },
+  contentSecurityPolicy: {    // enable and configure
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'trusted-cdn.com'],
+      styleSrc: ['style.com'],
+    }
+  },
+  dnsPrefetchControl: false,     // disable
+  noCache: true,
+}))
 
 
 
