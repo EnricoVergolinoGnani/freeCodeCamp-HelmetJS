@@ -18,7 +18,9 @@ app.use(helmet.noSniff());
 // Using helmet.ieNoOpen() to set X-Download-Options header to noopen.
 app.use(helmet.ieNoOpen());
 
-
+// Configuring helmet.hsts() to use HTTPS for the next 90 days.
+var ninetyDaysInSeconds = 90*24*60*60;
+app.use(helmet.hsts({maxAge: ninetyDaysInSeconds, force: true}))
 
 
 
