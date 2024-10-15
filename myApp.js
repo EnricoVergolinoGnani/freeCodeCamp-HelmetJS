@@ -6,10 +6,11 @@ const helmet = require('helmet');
 // Using the helmet.hidePoweredBy() middleware to remove the X-Powered-By header.
 app.use(helmet.hidePoweredBy());
 
-// Using helmet.frameguard() to set the X-Frame-Options header as DENY
+// Using helmet.frameguard() to set the X-Frame-Options header as DENY.
 app.use(helmet.frameguard({action: 'deny'}));
 
-
+// Using helmet.xssFilter() to enable the X-XSS-Protection HTTP header.
+app.use(helmet.xssFilter())
 
 
 
