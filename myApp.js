@@ -4,9 +4,7 @@ const app = express();
 const helmet = require('helmet');
 
 // Using the helmet.hidePoweredBy() middleware to remove the X-Powered-By header.
-//app.use(helmet.hidePoweredBy());
-
-//app.use(helmet.frameguard('deny'));
+app.use(helmet.hidePoweredBy());
 
 
 
